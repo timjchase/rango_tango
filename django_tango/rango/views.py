@@ -2,7 +2,10 @@ from django.shortcuts import render
 from .models import Page, Category
 from rango.forms import CategoryForm, PageForm
 
-# from django.http import HttpResponse
+# from django.urls import reverse
+from django.shortcuts import redirect
+
+
 from django.conf import settings
 
 
@@ -19,7 +22,16 @@ def index(request):
 
 
 def about(request):
-    context_dict = {"yourname": "Tim Chase", "MEDIA_URL": settings.MEDIA_URL}
+    # prints out whether the method is a GET or a POST
+    print(request.method)
+    # prints out the user name, if no one is logged in it prints `AnonymousUser`
+    print(request.user)
+
+    context_dict = {
+        "yourname": "Tim Chase",
+        "MEDIA_URL": settings.MEDIA_URL,
+        "category": None,
+    }
     return render(request, "rango/about.html", context=context_dict)
 
 
@@ -65,7 +77,9 @@ def add_category(request):
             # We could give a confirmation message
             # But since the most recent category added is on the index page
             # Then we can direct the user back to the index page.
+            # return redirect("index")
             return index(request)
+
             # The supplied form contained errors
             # just print them to the terminal.
         else:
@@ -92,7 +106,8 @@ def add_page(request, category_name_slug):
                 page.category = category
                 page.views = 0
                 page.save()
-                return show_category(request, category_name_slug)
+                # return show_category(request, category_name_slug)
+                return redirect("show_category", category_name_slug)
             # Save the new page to the database.
 
             # Now that the category is saved

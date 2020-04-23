@@ -1,5 +1,7 @@
+{% load rango_template_tags %}
 <!DOCTYPE html>
 {% load static %}
+
 <html>
 
 <head lang="en">
@@ -15,9 +17,16 @@
 <body>
     <div>
         {% block content %}
-        <!-- Page specific content goes here -->
+        Page specific content goes here
         {% endblock content %}
+
     </div>
+    <div>
+        {% block sidebar_block %}
+        {% get_category_list category %}
+        {% endblock sidebar_block %}
+    </div>
+
     <hr />
 
     <div>
