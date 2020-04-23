@@ -14,7 +14,11 @@ def index(request):
     # # Note the key boldmessage is the same as {{ boldmessage }} in the template!
     category_list = Category.objects.order_by("-likes")[:5]
     most_viewed_pages = Page.objects.order_by("-views")[:5]
-    context_dict = {"categories": category_list, "top_5_pages": most_viewed_pages}
+    context_dict = {
+        "categories": category_list,
+        "top_5_pages": most_viewed_pages,
+        "category": None,
+    }
     # Return a rendered response to send to the client.
     # # We make use of the shortcut function to make our lives easier.
     # # Note that the first parameter is the template we wish to use.
