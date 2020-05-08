@@ -6,8 +6,16 @@
 How to Tango with Django!
 {% endblock title_block %}
 
+
 {% block content %}
 <div>
+    <div>
+        {% if user.is_authenticated %}
+        howdy {{ user.username }}
+        {% else %}
+        hey there partner
+        {% endif %}
+    </div>
     {% if categories %}
     <h2>Most Liked Categories</h1>
         <ul>
