@@ -1,0 +1,45 @@
+{% extends 'rango/base.html' %}
+{% block title_block %}
+Register
+{% endblock title_block %}
+
+{% block content %}
+<h2 class="form-signin-heading">Sign Up Here</h2>
+<form role='form' method='post' action='.'>
+    {% csrf_token %}
+    <div class="form-group">
+        <p class='required'>
+            <label class="required" for="id_username">Username:</label>
+            <input class="form-control" type="text" name="username" maxlength="30" autofocus required id="id_username">
+            <span class="helptext">Required. 30 characters or fewer. Letters, digits and @/./+/-/_ only.</span>
+        </p>
+        <p class="required">
+            <label class="required" for="id_email">E-mail:</label>
+            <input class="form-control" type="email" name="email" required id="id_email">
+        </p>
+
+        <p class="required">
+            <label class="required" for="id_password1">Password:</label>
+            <input class="form-control" type="password" name="password1" autocomplete="new-password" required
+                id="id_password1">
+            <span class="helptext">
+                <ul>
+                    <li>Your password can’t be too similar to your other personal information.</li>
+                    <li>Your password must contain at least 8 characters.</li>
+                    <li>Your password can’t be a commonly used password.</li>
+                    <li>Your password can’t be entirely numeric.</li>
+                </ul>
+            </span>
+        </p>
+        <p class="required">
+            <label class="required" for="id_password2">Password confirmation:</label>
+            <input class="form-control" type="password" name="password2" autocomplete="new-password" required
+                id="id_password2">
+            <span class="helptext">Enter the same password as before, for verification.</span>
+        </p>
+
+
+    </div>
+    <button type="submit" class="btn btn-default">Submit</button>
+</form>
+{% endblock content %}

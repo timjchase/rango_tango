@@ -2,16 +2,15 @@
 {% load static %}
 
 {% block title_block %}
-Register
+Register Tim
 {% endblock title_block %}
 
 {% block content %}
-<h1>Register for Rango</h1>
-{% if registered %}
-Rango says: <strong>thank you for registering!</strong>
+<!-- <h2 class="form-signin-heading">Sign Up Here</h2 {% if registered %} Rango says: <strong>thank you for
+registering!</strong>
 <a href="{% url 'index' %}">Return to the homepage.</a><br />
 {% else %}
-Rango says: <strong>register here!</strong><br />
+Rango says: <strong>register here!</strong><br /> -->
 <form id="user_form" method="post" action="{% url 'register' %}" enctype="multipart/form-data">
 
     {% csrf_token %}
