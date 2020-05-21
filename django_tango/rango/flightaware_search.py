@@ -1,4 +1,4 @@
-# apikey = "AIzaSyBmhK8bY--C0JvQY-2TTraYY7MZctIOKMk"
+
 # https://flightaware.com/live/flight/N848UP/history
 import json
 import urllib.parse
@@ -28,8 +28,9 @@ def run_query(search_terms):
 
     root_url = "https://www.googleapis.com/customsearch/v1?"
 
-    # cseID = "006766164342167206996:ycrqsfyn7gx"
-    cseID = "006766164342167206996:osoigujjicr"
+    #cseID = "006766164342167206996:ycrqsfyn7gx"   #flightaware root
+    #cseID = "006766164342167206996:osoigujjicr"   #flightaware flight tracking
+    cseID = '006766164342167206996:sofjzjlnmgg'  #google
     query_string = urllib.parse.quote(search_terms)
 
     search_url = ("{root_url}key={key}&cx={searchID}&q={query}").format(
