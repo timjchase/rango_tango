@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 {% load static %}
+
+
 {% load rango_template_tags %}
 <html lang="en">
 
@@ -89,13 +91,27 @@ initial-scale=1, shrink-to-fit=no">
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-3 col-md-2 sidebar">
-                {% block sidebar_block %}
-                {% if category %}
+                <ul class="nav nav-list">
+                    <li class="nav-header">Find a Category</li>
+                    <form>
+                        <label></label>
+                        <li><input class="search-query span10" type="text" name="suggestion" value="" id="suggestion" />
+                        </li>
+                    </form>
+                </ul>
+
+                <div id="cats">
+
+                </div>
+
+                <hr />
+                {% block side_block %}
+                <ul class="nav nav-list">
+                    <li class="nav-header">Category List</li>
+                </ul>
                 {% get_category_list category %}
-                {% else %}
-                {% get_category_list %}
-                {% endif %}
                 {% endblock %}
+
             </div>
             <div class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 main">
                 {% block content %}{% endblock content %}
@@ -105,13 +121,15 @@ initial-scale=1, shrink-to-fit=no">
     <!-- Bootstrap core JavaScript
 ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js">
     </script>
     <script src="http://v4-alpha.getbootstrap.com/dist/js/bootstrap.min.js">
     </script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="http://v4-alpha.getbootstrap.com/assets/js/ie10-viewport-bug-workaround.js">
     </script>
+    <script src="{% static "js/rango-ajax.js" %}"></script>
+    <script src="{% static "js/rango-jquery.js" %}"></script>
 </body>
 
 </html>
