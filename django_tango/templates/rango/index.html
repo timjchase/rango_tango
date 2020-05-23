@@ -24,7 +24,8 @@ Index
         <ul class="list-group">
             {% for category in categories %}
             <li class="list-group-item">
-                <a href="{% url 'show_category' category.slug %}">{{  category.name }}</a>
+                <a href="{% url 'show_category' category.slug %}">{{ category.name }} </a>
+                <span class="badge badge-pill badge-info"> {{ category.likes }}</span>
             </li>
             {% endfor %}
         </ul>
@@ -39,7 +40,8 @@ Index
             {% if top_5_pages %}
         <ul class="list-group">
             {% for page in top_5_pages %}
-            <li class="list-group-item"><a href="{{ page.url }}">{{ page.title }}</a></li>
+            <li class="list-group-item"><a href="{{ page.url }}">{{ page.title }}</a><span
+                    class="badge badge-pill badge-info"> {{ page.views }}</span></li>
             {% endfor %}
         </ul>
         {% else %}

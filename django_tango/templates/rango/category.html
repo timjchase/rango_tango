@@ -21,7 +21,9 @@
         <a href="{% url 'goto' %}?page_id={{page.id}}">{{ page.title }}</a>
         {% if page.views > 1 %}
         ({{ page.views }} views)
+        <span class="badge badge-pill badge-info">{{ page.views }}</span>
         {% elif page.views == 1 %}
+        <span class="badge badge-pill badge-info">{{ page.views }}</span>
         ({{ page.views }} view)
         {% endif %}
     </li>
@@ -36,7 +38,7 @@
 {% else %}
 <strong>There are no categories present.</strong>
 {% endif %}
-{% if user.is_authenticated %}
+
 <div>
     <form class='form-inline' id='user-form' method='post' action='{% url  'show_category' category.slug %}'>
         {% csrf_token %}
@@ -58,12 +60,17 @@
                 </h4>
                 <br />
                 <p class="list-group-item-text">{{ result.summary }}</p>
+                {% if user.is_authenticated %}
+                <button data-catid="{{category.id}}" data-title="{{ result.title }}" data-url="{{ result.link }}"
+                    class="rango-add btn btn-info btn-sm" type="button">Add</button>
+                {% endif %}
+
             </div>
             {% endfor %}
         </div>
         {% endif %}
     </div>
 </div>
-{% endif %}
+
 
 {% endblock content %}

@@ -136,6 +136,8 @@ def add_page(request, category_name_slug):
                 page = form.save(commit=False)
                 page.category = category
                 page.views = 0
+                page.first_visit = datetime.now()
+                page.last_visit = datetime.now()
                 page.save()
                 # return show_category(request, category_name_slug)
                 return redirect("show_category", category_name_slug)
@@ -294,6 +296,7 @@ def track_url(request):
             try:
                 page = Page.objects.get(id=page_id)
                 page.views = page.views + 1
+                page.last_visit = datetime.now()
                 page.save()
                 url = page.url
             except:
@@ -394,3 +397,22 @@ def suggest_category(request):
     cat_list = get_category_list(8, starts_with)
 
     return render(request, "rango/cats.html", {"cats": cat_list})
+
+
+@login_required
+def auto_add_page(request):
+    cat_id = None
+    url = None
+    title = None
+    context_dict = {}
+    if request.method == "GET":
+        cat_id = request.GET["category_id"]
+        url = request.GET["url"]
+        title = request.GET["title"]
+        if cat_id:
+            category = Category.objects.get(id=int(cat_id))
+            p = Page.objects.get_or_create(category=category, title=title, url=url)
+            pages = Page.objects.filter(category=category).order_by("-views")
+
+            context_dict["pages"] = pages
+    return render(request, "rango/page_list.html", context_dict)

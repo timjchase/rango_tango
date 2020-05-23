@@ -1,0 +1,9 @@
+{% if pages %}
+<ul>
+    {% for gage in pages %}
+    <li><a href="{% url 'goto' %}?page.id={{page.id}}" \>{{ page.title }}</a></li>
+    {% endfor %}
+</ul>
+{{ else }}
+<strong>No pages currently in category</strong>
+{% endif %}
